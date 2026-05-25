@@ -3,6 +3,7 @@ export type IrrigationMode = "none" | "standard" | "smart";
 export type TelemetryQuality = "verified" | "estimated" | "warning";
 export type TrackPointState = "work" | "turn" | "idle";
 export type EventSeverity = "info" | "warning" | "critical";
+export type UserRole = "user" | "admin";
 
 export type TelemetryPacket = {
   id: string;
@@ -150,4 +151,42 @@ export type ScenarioResult = {
   waterNeedMm: number;
   factors: ScenarioFactor[];
   economicEffect: EconomicEffect;
+};
+
+export type DemoUser = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: UserRole;
+  createdAt: string;
+};
+
+export type PublicDemoUser = Omit<DemoUser, "password">;
+
+export type FieldOverride = {
+  fieldId: string;
+  status?: FieldStatus;
+  recommendation?: string;
+  irrigationMode?: IrrigationMode;
+  irrigationWindow?: string;
+  riskIndex?: number;
+  yieldForecast?: number;
+  soilMoisture?: number;
+  airTemperature?: number;
+  airHumidity?: number;
+  soilPh?: number;
+  precipitation?: number;
+  nutrients?: {
+    n: number;
+    p: number;
+    k: number;
+  };
+  updatedAt?: string;
+  lastEditedBy?: string;
+};
+
+export type DemoDatabase = {
+  users: DemoUser[];
+  fieldOverrides: FieldOverride[];
 };

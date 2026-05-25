@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import "@/app/globals.css";
 import "@/styles/leaflet-overrides.css";
 import { AppHeader } from "@/components/app-header";
+import { DemoPlatformProvider } from "@/components/providers/demo-platform-provider";
 
 export const metadata: Metadata = {
   title: "AgroSphere GIS Portal",
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-canvas text-ink font-body">
-        <div className="relative min-h-screen">
-          <AppHeader />
-          <main className="mx-auto flex w-full max-w-[1920px] flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8 2xl:px-10">
-            {children}
-          </main>
-        </div>
+        <DemoPlatformProvider>
+          <div className="relative min-h-screen">
+            <AppHeader />
+            <main className="mx-auto flex w-full max-w-[1920px] flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8 2xl:px-10">
+              {children}
+            </main>
+          </div>
+        </DemoPlatformProvider>
       </body>
     </html>
   );

@@ -7,8 +7,8 @@ import { FieldSidebar } from "@/components/gis/field-sidebar";
 import { MapView } from "@/components/gis/map-view";
 import { OperationsReplay } from "@/components/gis/operations-replay";
 import { ScenarioLab } from "@/components/gis/scenario-lab";
+import { useDemoPlatform } from "@/components/providers/demo-platform-provider";
 import { SectionCard } from "@/components/ui/section-card";
-import { fields } from "@/data/fields";
 import { getUniqueCrops } from "@/utils/field-helpers";
 import {
   applyScenarioPreset,
@@ -46,6 +46,7 @@ const workspaceViews: Array<{
 ];
 
 export default function GISPage() {
+  const { fields } = useDemoPlatform();
   const [selectedFieldId, setSelectedFieldId] = useState(fields[0]?.id ?? "");
   const [selectedCrop, setSelectedCrop] = useState<string>("All crops");
   const [selectedStatus, setSelectedStatus] = useState<string>("All statuses");

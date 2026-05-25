@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { KPIStatCard } from "@/components/dashboard/kpi-stat-card";
 import { RecommendationCard } from "@/components/dashboard/recommendation-card";
 import { SectionCard } from "@/components/ui/section-card";
-import { fields } from "@/data/fields";
+import { useDemoPlatform } from "@/components/providers/demo-platform-provider";
 import {
   getDashboardMetrics,
   getLatestRecommendations,
@@ -15,6 +17,7 @@ import {
 } from "@/utils/formatters";
 
 export default function DashboardPage() {
+  const { fields } = useDemoPlatform();
   const metrics = getDashboardMetrics(fields);
   const latestRecommendations = getLatestRecommendations(fields);
   const topRiskFields = getMostAtRiskFields(fields);

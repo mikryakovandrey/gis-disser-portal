@@ -1,16 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import type { Route } from "next";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { useDemoPlatform } from "@/components/providers/demo-platform-provider";
 
-const navItems = [
+type NavItem = {
+  href: Route;
+  label: string;
+};
+
+const navItems: NavItem[] = [
   { href: "/", label: "Dashboard" },
-  { href: "/gis", label: "GIS Portal" }
-] as const;
+  { href: "/gis", label: "GIS Portal" },
+  { href: "/profile", label: "Profile" }
+];
 
 export function AppHeader() {
   const pathname = usePathname();
+  const { currentUser, logout, isReady } = useDemoPlatform();
+  const roleAwareItems: NavItem[] =
+    currentUser?.role === "admin"
+      ? [...navItems, { href: "/admin", label: "Admin" }]
+      : navItems;
 
   return (
     <header className="sticky top-0 z-[1000] border-b border-white/50 bg-canvas/75 backdrop-blur-xl">
@@ -30,7 +43,7 @@ export function AppHeader() {
         </div>
 
         <div className="hidden items-center gap-2 rounded-full border border-white/60 bg-white/60 p-1 shadow-soft md:flex">
-          {navItems.map((item) => {
+          {roleAwareItems.map((item) => {
             const isActive =
               item.href === "/"
                 ? pathname === item.href
@@ -54,6 +67,43 @@ export function AppHeader() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
+          {isReady ? (
+            currentUser ? (
+              <>
+                <div className="rounded-full border border-white/70 bg-white/70 px-4 py-2 text-sm text-slate-600 shadow-soft">
+                  Signed in:{" "}
+                  <span className="font-semibold text-slate-800">
+                    {currentUser.name}
+                  </span>{" "}
+                  <span className="uppercase tracking-[0.14em] text-slate-500">
+                    {currentUser.role}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-white"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-white"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-full bg-moss px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#21473a]"
+                >
+                  Register
+                </Link>
+              </>
+            )
+          ) : null}
           <div className="rounded-full border border-white/70 bg-white/70 px-4 py-2 text-sm text-slate-600 shadow-soft">
             Model status: <span className="font-semibold text-slate-800">Operational</span>
           </div>
