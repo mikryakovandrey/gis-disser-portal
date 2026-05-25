@@ -12,6 +12,7 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
   return (
@@ -25,11 +26,11 @@ export default function RegisterPage() {
             className="space-y-4"
             onSubmit={(event) => {
               event.preventDefault();
-              const result = register({ name, email, password });
+              const result = register({ name, email, password, confirmPassword });
               setMessage(result.message);
 
               if (result.ok) {
-                router.push("/profile");
+                router.push("/verify");
               }
             }}
           >
@@ -59,6 +60,16 @@ export default function RegisterPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full rounded-[20px] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-emerald-400"
                 placeholder="Create password"
+              />
+            </label>
+            <label className="block space-y-2">
+              <span className="text-sm font-semibold text-slate-700">Confirm password</span>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                className="w-full rounded-[20px] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-emerald-400"
+                placeholder="Repeat password"
               />
             </label>
 
@@ -91,6 +102,7 @@ export default function RegisterPage() {
             <ul className="space-y-3 text-sm leading-7 text-slate-600">
               <li>The account is stored in the browser-local demo database.</li>
               <li>Every new registration receives the <span className="font-semibold text-slate-800">user</span> role.</li>
+              <li>Email format and password strength are validated before account creation.</li>
               <li>Role promotion to <span className="font-semibold text-slate-800">admin</span> is available only from the admin console.</li>
             </ul>
           </div>

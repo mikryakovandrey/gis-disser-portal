@@ -159,6 +159,8 @@ export type DemoUser = {
   email: string;
   password: string;
   role: UserRole;
+  isVerified: boolean;
+  verificationCode?: string;
   createdAt: string;
 };
 

@@ -32,6 +32,10 @@ export default function LoginPage() {
               event.preventDefault();
               const result = login(email, password);
               setMessage(result.message);
+
+              if (!result.ok && result.message.includes("verification")) {
+                router.push("/verify");
+              }
             }}
           >
             <label className="block space-y-2">
@@ -87,6 +91,9 @@ export default function LoginPage() {
               </p>
               <p>
                 User demo account: <span className="font-semibold text-slate-800">user@agrosphere.demo / user123</span>
+              </p>
+              <p>
+                Newly registered accounts must pass verification before the dashboard and GIS portal unlock.
               </p>
             </div>
           </div>

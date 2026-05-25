@@ -26,13 +26,14 @@ export default function ProfilePage() {
               value={currentUser?.role.toUpperCase() ?? "-"}
             />
             <ProfileStat
+              label="Verification"
+              value={currentUser?.isVerified ? "VERIFIED" : "PENDING"}
+            />
+            <ProfileStat
               label="Users in demo DB"
               value={String(users.length)}
             />
-            <ProfileStat
-              label="Field overrides"
-              value={String(fieldOverrides.length)}
-            />
+            <ProfileStat label="Field overrides" value={String(fieldOverrides.length)} />
           </div>
         </SectionCard>
 

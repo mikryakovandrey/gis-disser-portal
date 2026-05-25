@@ -54,6 +54,27 @@ export function RoleGate({
     );
   }
 
+  if (!currentUser.isVerified) {
+    return (
+      <SectionCard
+        title="Email verification required"
+        subtitle="The account exists, but access stays locked until verification is completed."
+      >
+        <div className="space-y-4 rounded-[22px] border border-amber-200 bg-amber-50/80 px-5 py-6">
+          <p className="text-sm leading-7 text-slate-700">
+            Signed in as <span className="font-semibold">{currentUser.email}</span>, but the account is not verified yet.
+          </p>
+          <Link
+            href="/verify"
+            className="inline-flex rounded-full bg-moss px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#21473a]"
+          >
+            Open verification step
+          </Link>
+        </div>
+      </SectionCard>
+    );
+  }
+
   if (!allow.includes(currentUser.role)) {
     return (
       <SectionCard

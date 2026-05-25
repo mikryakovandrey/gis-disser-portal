@@ -74,7 +74,7 @@ export default function AdminPage() {
                     <div className="font-semibold text-slate-800">{user.name}</div>
                     <div className="text-sm text-slate-500">{user.email}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-500">
-                      {user.role} · created {user.createdAt}
+                      {user.role} · {user.isVerified ? "verified" : "pending verification"} · created {user.createdAt}
                     </div>
                   </div>
 

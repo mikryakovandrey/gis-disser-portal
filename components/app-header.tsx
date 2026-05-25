@@ -22,8 +22,14 @@ export function AppHeader() {
   const { currentUser, logout, isReady } = useDemoPlatform();
   const roleAwareItems: NavItem[] =
     currentUser?.role === "admin"
-      ? [...navItems, { href: "/admin", label: "Admin" }]
-      : navItems;
+      ? [
+          ...navItems,
+          ...(currentUser.isVerified ? [] : [{ href: "/verify", label: "Verify" } as NavItem]),
+          { href: "/admin", label: "Admin" }
+        ]
+      : currentUser && !currentUser.isVerified
+        ? [...navItems, { href: "/verify", label: "Verify" }]
+        : navItems;
 
   return (
     <header className="sticky top-0 z-[1000] border-b border-white/50 bg-canvas/75 backdrop-blur-xl">
@@ -77,6 +83,9 @@ export function AppHeader() {
                   </span>{" "}
                   <span className="uppercase tracking-[0.14em] text-slate-500">
                     {currentUser.role}
+                  </span>
+                  <span className="ml-2 rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    {currentUser.isVerified ? "verified" : "unverified"}
                   </span>
                 </div>
                 <button

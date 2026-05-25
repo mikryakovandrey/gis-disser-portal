@@ -29,6 +29,7 @@ const seedUsers: DemoUser[] = [
     email: "admin@agrosphere.demo",
     password: "admin123",
     role: "admin",
+    isVerified: true,
     createdAt: "2026-05-25"
   },
   {
@@ -37,6 +38,7 @@ const seedUsers: DemoUser[] = [
     email: "user@agrosphere.demo",
     password: "user123",
     role: "user",
+    isVerified: true,
     createdAt: "2026-05-25"
   }
 ];
@@ -50,6 +52,7 @@ type RegisterPayload = {
   name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 type DemoPlatformContextValue = {
@@ -60,6 +63,7 @@ type DemoPlatformContextValue = {
   fieldOverrides: FieldOverride[];
   login: (email: string, password: string) => { ok: boolean; message: string };
   register: (payload: RegisterPayload) => { ok: boolean; message: string };
+  verifyCurrentUser: (code: string) => { ok: boolean; message: string };
   logout: () => void;
   setUserRole: (userId: string, role: UserRole) => void;
   deleteUser: (userId: string) => void;
@@ -81,13 +85,7 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
     if (storedDb) {
       try {
         const parsed = JSON.parse(storedDb) as DemoDatabase;
-        setDatabase({
-          users:
-            parsed.users?.length > 0
-              ? parsed.users
-              : seedDatabase.users,
-          fieldOverrides: parsed.fieldOverrides ?? []
-        });
+        setDatabase(normalizeDatabase(parsed));
       } catch {
         setDatabase(seedDatabase);
       }
@@ -174,6 +172,15 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
         };
       }
 
+      if (!user.isVerified) {
+        setSessionUserId(user.id);
+
+        return {
+          ok: false,
+          message: "Account exists, but email verification is still required."
+        };
+      }
+
       setSessionUserId(user.id);
 
       return {
@@ -185,8 +192,22 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
   );
 
   const register = useCallback(
-    ({ name, email, password }: RegisterPayload) => {
+    ({ name, email, password, confirmPassword }: RegisterPayload) => {
+      const cleanName = name.trim();
       const normalizedEmail = email.trim().toLowerCase();
+      const validationError = validateRegistration({
+        name: cleanName,
+        email: normalizedEmail,
+        password,
+        confirmPassword
+      });
+
+      if (validationError) {
+        return {
+          ok: false,
+          message: validationError
+        };
+      }
 
       if (database.users.some((user) => user.email.toLowerCase() === normalizedEmail)) {
         return {
@@ -195,12 +216,15 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
         };
       }
 
+      const verificationCode = generateVerificationCode();
       const newUser: DemoUser = {
         id: `user-${Date.now()}`,
-        name: name.trim(),
+        name: cleanName,
         email: normalizedEmail,
         password,
         role: "user",
+        isVerified: false,
+        verificationCode,
         createdAt: new Date().toISOString().slice(0, 10)
       };
 
@@ -212,10 +236,64 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
 
       return {
         ok: true,
-        message: "Registration complete."
+        message: `Registration complete. Verify your account with code ${verificationCode}.`
       };
     },
     [database.users]
+  );
+
+  const verifyCurrentUser = useCallback(
+    (code: string) => {
+      if (!sessionUserId) {
+        return {
+          ok: false,
+          message: "No active session available for verification."
+        };
+      }
+
+      const normalizedCode = code.trim();
+      const user = database.users.find((item) => item.id === sessionUserId);
+
+      if (!user) {
+        return {
+          ok: false,
+          message: "User session not found."
+        };
+      }
+
+      if (user.isVerified) {
+        return {
+          ok: true,
+          message: "Account is already verified."
+        };
+      }
+
+      if (user.verificationCode !== normalizedCode) {
+        return {
+          ok: false,
+          message: "Incorrect verification code."
+        };
+      }
+
+      setDatabase((current) => ({
+        ...current,
+        users: current.users.map((item) =>
+          item.id === sessionUserId
+            ? {
+                ...item,
+                isVerified: true,
+                verificationCode: undefined
+              }
+            : item
+        )
+      }));
+
+      return {
+        ok: true,
+        message: "Account verified successfully."
+      };
+    },
+    [database.users, sessionUserId]
   );
 
   const logout = useCallback(() => {
@@ -298,6 +376,7 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
       fieldOverrides: database.fieldOverrides,
       login,
       register,
+      verifyCurrentUser,
       logout,
       setUserRole,
       deleteUser,
@@ -314,6 +393,7 @@ export function DemoPlatformProvider({ children }: { children: ReactNode }) {
       login,
       logout,
       register,
+      verifyCurrentUser,
       setUserRole,
       deleteUser,
       upsertFieldOverride
@@ -340,4 +420,63 @@ export function useDemoPlatform() {
 function toPublicUser(user: DemoUser): PublicDemoUser {
   const { password, ...publicUser } = user;
   return publicUser;
+}
+
+function normalizeDatabase(database: DemoDatabase): DemoDatabase {
+  return {
+    users:
+      database.users?.length > 0
+        ? database.users.map((user) => ({
+            ...user,
+            isVerified: user.isVerified ?? true
+          }))
+        : seedDatabase.users,
+    fieldOverrides: database.fieldOverrides ?? []
+  };
+}
+
+function validateRegistration({
+  name,
+  email,
+  password,
+  confirmPassword
+}: {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}) {
+  if (name.length < 3) {
+    return "Full name must contain at least 3 characters.";
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return "Enter a valid email address.";
+  }
+
+  if (password.length < 8) {
+    return "Password must contain at least 8 characters.";
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    return "Password must include at least one uppercase letter.";
+  }
+
+  if (!/[a-z]/.test(password)) {
+    return "Password must include at least one lowercase letter.";
+  }
+
+  if (!/\d/.test(password)) {
+    return "Password must include at least one number.";
+  }
+
+  if (password !== confirmPassword) {
+    return "Password confirmation does not match.";
+  }
+
+  return null;
+}
+
+function generateVerificationCode() {
+  return String(Math.floor(100000 + Math.random() * 900000));
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { RoleGate } from "@/components/auth/role-gate";
 import { KPIStatCard } from "@/components/dashboard/kpi-stat-card";
 import { RecommendationCard } from "@/components/dashboard/recommendation-card";
 import { SectionCard } from "@/components/ui/section-card";
@@ -23,7 +24,8 @@ export default function DashboardPage() {
   const topRiskFields = getMostAtRiskFields(fields);
 
   return (
-    <div className="relative z-10 flex flex-col gap-6">
+    <RoleGate allow={["user", "admin"]}>
+      <div className="relative z-10 flex flex-col gap-6">
       <section className="app-panel overflow-hidden">
         <div className="grid gap-8 px-6 py-7 lg:grid-cols-[1.45fr_0.95fr] lg:px-8 lg:py-8">
           <div className="space-y-5">
@@ -200,6 +202,7 @@ export default function DashboardPage() {
           </div>
         </SectionCard>
       </section>
-    </div>
+      </div>
+    </RoleGate>
   );
 }

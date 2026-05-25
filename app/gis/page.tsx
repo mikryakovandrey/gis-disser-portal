@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { RoleGate } from "@/components/auth/role-gate";
 import { AnalyticsCharts } from "@/components/gis/analytics-charts";
 import { FieldDetailsPanel } from "@/components/gis/field-details-panel";
 import { FieldSidebar } from "@/components/gis/field-sidebar";
@@ -97,7 +98,8 @@ export default function GISPage() {
   const analyticsField = scenarioResult?.field ?? baseSelectedField;
 
   return (
-    <div className="relative z-10 flex flex-col gap-6">
+    <RoleGate allow={["user", "admin"]}>
+      <div className="relative z-10 flex flex-col gap-6">
       <section className="app-panel overflow-hidden px-6 py-6 lg:px-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
@@ -313,6 +315,7 @@ export default function GISPage() {
           ) : null}
         </div>
       </div>
-    </div>
+      </div>
+    </RoleGate>
   );
 }
