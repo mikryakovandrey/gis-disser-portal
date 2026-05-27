@@ -35,7 +35,7 @@ export default function DashboardPage() {
                 AgroSphere GIS portal for intelligent precision farming decisions
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
-                A thesis demonstration platform centered on the Pavlodar pilot
+                A precision farming platform centered on the Pavlodar pilot
                 zone that combines field geography, IoT telemetry, agronomic
                 indicators, live scenario simulation, forecasted yield, and
                 decision-support recommendations in one analytical workspace.

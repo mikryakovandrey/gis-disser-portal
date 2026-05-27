@@ -18,8 +18,8 @@ export default function RegisterPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <SectionCard
-        title="Register demo user"
-        subtitle="Create a local user account and sign in immediately."
+        title="Create account"
+        subtitle="Register a new account to access the platform."
       >
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <form
@@ -100,7 +100,7 @@ export default function RegisterPage() {
               Registration flow
             </div>
             <ul className="space-y-3 text-sm leading-7 text-slate-600">
-              <li>The account is stored in the browser-local demo database.</li>
+              <li>Each account is created with its own access profile.</li>
               <li>Every new registration receives the <span className="font-semibold text-slate-800">user</span> role.</li>
               <li>Email format and password strength are validated before account creation.</li>
               <li>Role promotion to <span className="font-semibold text-slate-800">admin</span> is available only from the admin console.</li>

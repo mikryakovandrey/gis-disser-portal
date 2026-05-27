@@ -82,19 +82,19 @@ export default function VerifyPage() {
 
           <div className="space-y-4 rounded-[26px] border border-slate-200 bg-slate-50/80 p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-              Demo mailbox
+              Verification inbox
             </div>
             {isDemoMailboxVisible ? (
               <div className="space-y-3 text-sm leading-7 text-slate-600">
                 <p>
-                  Because this thesis build runs on GitHub Pages without a backend mail server, verification is simulated inside the app.
+                  Verification codes are issued in-app and linked to the current account.
                 </p>
                 <p>
-                  Use the generated code from your local demo mailbox. The code is stored only in browser-local demo data.
+                  Use the generated code below to activate access.
                 </p>
                 <div className="rounded-[20px] border border-dashed border-emerald-200 bg-white px-4 py-4">
                   <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
-                    Local verification code
+                    Active verification code
                   </div>
                   <div className="mt-2 font-display text-3xl tracking-[0.18em] text-ink">
                     {currentUser?.verificationCode ?? "------"}

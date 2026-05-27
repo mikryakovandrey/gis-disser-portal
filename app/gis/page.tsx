@@ -110,7 +110,7 @@ export default function GISPage() {
               </h1>
               <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
                 Review field conditions for the Irtysh district pilot contours, inspect
-                agronomic telemetry, demonstrate how changing soil and weather
+                agronomic telemetry, evaluate how changing soil and weather
                 inputs shifts risk and yield, and replay field operations to connect
                 execution quality with the final result.
               </p>

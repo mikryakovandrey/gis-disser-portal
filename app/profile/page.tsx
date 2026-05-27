@@ -14,7 +14,7 @@ export default function ProfilePage() {
       <div className="flex flex-col gap-6">
         <SectionCard
           title="User profile"
-          subtitle="Session summary for the current thesis demo account."
+          subtitle="Session summary and access status for the current account."
         >
           <div className="grid gap-4 lg:grid-cols-4">
             <ProfileStat
@@ -30,7 +30,7 @@ export default function ProfilePage() {
               value={currentUser?.isVerified ? "VERIFIED" : "PENDING"}
             />
             <ProfileStat
-              label="Users in demo DB"
+              label="Registered users"
               value={String(users.length)}
             />
             <ProfileStat label="Field overrides" value={String(fieldOverrides.length)} />
@@ -62,25 +62,25 @@ export default function ProfilePage() {
                 <WorkspaceCard
                   href="/admin"
                   title="Admin console"
-                  body="Manage users and field overrides in the local demo database."
+                  body="Manage users and live field configuration changes."
                 />
               ) : null}
             </div>
           </SectionCard>
 
           <SectionCard
-            title="Defense talking points"
-            subtitle="How to explain this part during the presentation."
+            title="Account security"
+            subtitle="Authentication and access controls for the platform."
           >
             <div className="space-y-4 rounded-[24px] border border-slate-200 bg-slate-50/80 p-5 text-sm leading-7 text-slate-600">
               <p>
                 The system supports user authentication and role-based access separation.
               </p>
               <p>
-                Standard users can inspect dashboards and GIS analytics, while administrators can also manage users and demo field states.
+                Standard users can inspect dashboards and GIS analytics, while administrators can also manage users and field states.
               </p>
               <p>
-                In this defense build, the data layer is implemented as a local browser database, which keeps the prototype fully deployable on GitHub Pages.
+                Access to operational workspaces is locked until the account passes verification.
               </p>
             </div>
           </SectionCard>

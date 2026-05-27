@@ -81,7 +81,7 @@ export function ScenarioLab({
   return (
     <SectionCard
       title="Scenario Lab"
-      subtitle="Separate observed field conditions from controllable actions so the demo clearly shows what the operator can really change."
+      subtitle="Separate observed field conditions from controllable actions so operators can clearly see what can be adjusted."
     >
       <div className="space-y-5">
         <div className="flex flex-col gap-4 rounded-[24px] border border-slate-200 bg-slate-50/70 p-4 lg:flex-row lg:items-start lg:justify-between">
@@ -123,7 +123,7 @@ export function ScenarioLab({
               Observed field scenarios
             </div>
             <div className="mt-1 text-sm text-slate-600">
-              External conditions and stress stories for the defense. These describe what the field experiences, not what the operator directly controls.
+              External conditions that describe what the field experiences, not what the operator directly controls.
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {observedPresets.map((preset) => (
@@ -429,12 +429,12 @@ export function ScenarioLab({
         <div className="rounded-[24px] border border-slate-200 bg-gradient-to-br from-[#eef5ea] to-white p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
-                Economic effect
-              </div>
-              <div className="mt-1 text-sm text-slate-600">
-                A defense-friendly view of what the scenario means for yield, water, fuel, and money.
-              </div>
+            <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
+              Economic effect
+            </div>
+            <div className="mt-1 text-sm text-slate-600">
+                A business view of what the scenario means for yield, water, fuel, and money.
+            </div>
             </div>
             <div
               className={`rounded-full px-4 py-2 text-sm font-semibold ${

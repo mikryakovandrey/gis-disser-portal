@@ -49,20 +49,20 @@ export default function AdminPage() {
       <div className="flex flex-col gap-6">
         <SectionCard
           title="Admin console"
-          subtitle="Manage users and live field overrides in the local demo database."
+          subtitle="Manage users and live field overrides."
         >
           <div className="grid gap-4 lg:grid-cols-4">
             <AdminStat label="Current admin" value={currentUser?.email ?? "-"} />
             <AdminStat label="Registered users" value={String(users.length)} />
             <AdminStat label="Field overrides" value={String(fieldOverrides.length)} />
-            <AdminStat label="Storage mode" value="Browser local DB" />
+            <AdminStat label="Access mode" value="Role-based" />
           </div>
         </SectionCard>
 
         <div className="grid gap-6 xl:grid-cols-[1fr_1.05fr]">
           <SectionCard
             title="User management"
-            subtitle="Promote roles and remove demo accounts."
+            subtitle="Promote roles and remove accounts."
           >
             <div className="space-y-4">
               {users.map((user) => (
@@ -103,7 +103,7 @@ export default function AdminPage() {
 
           <SectionCard
             title="Field override editor"
-            subtitle="Adjust the live presentation state without changing the seed dataset."
+            subtitle="Adjust the live operational state without changing the base dataset."
           >
             {activeField ? (
               <form
@@ -225,7 +225,7 @@ export default function AdminPage() {
                     onClick={() => clearFieldOverride(activeField.id)}
                     className="rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-white"
                   >
-                    Reset field to seed
+                    Reset field to base
                   </button>
                 </div>
               </form>

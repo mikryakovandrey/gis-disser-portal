@@ -17,7 +17,7 @@ export function RoleGate({
 
   if (!isReady) {
     return (
-      <SectionCard title="Loading access state" subtitle="Checking session and local demo database.">
+      <SectionCard title="Loading access state" subtitle="Checking the current session and access policy.">
         <div className="rounded-[22px] border border-slate-200 bg-slate-50/80 px-5 py-10 text-sm text-slate-500">
           Loading...
         </div>
@@ -33,7 +33,7 @@ export function RoleGate({
       >
         <div className="space-y-4 rounded-[22px] border border-slate-200 bg-slate-50/80 px-5 py-6">
           <p className="text-sm leading-7 text-slate-600">
-            Sign in with the demo credentials or register a new user account to continue.
+            Sign in or create a new account to continue.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link

@@ -9,8 +9,8 @@ import { useDemoPlatform } from "@/components/providers/demo-platform-provider";
 export default function LoginPage() {
   const router = useRouter();
   const { login, currentUser, isReady } = useDemoPlatform();
-  const [email, setEmail] = useState("admin@agrosphere.demo");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export default function LoginPage() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <SectionCard
-        title="Demo login"
-        subtitle="Client-side authentication for the thesis defense build."
+        title="Sign in"
+        subtitle="Access the platform with your account credentials."
       >
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <form
@@ -44,6 +44,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className="w-full rounded-[20px] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-emerald-400"
+                placeholder="name@example.com"
               />
             </label>
             <label className="block space-y-2">
@@ -53,6 +54,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full rounded-[20px] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-emerald-400"
+                placeholder="Enter password"
               />
             </label>
 
@@ -80,20 +82,17 @@ export default function LoginPage() {
 
           <div className="space-y-4 rounded-[26px] border border-slate-200 bg-slate-50/80 p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
-              Ready for defense
+              Secure access
             </div>
             <div className="space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                This demo build uses a local browser database to simulate real authentication and role separation.
+                Sign in to access dashboards, GIS monitoring, scenario analysis, and operational reports.
               </p>
               <p>
-                Admin demo account: <span className="font-semibold text-slate-800">admin@agrosphere.demo / admin123</span>
+                New accounts must complete verification before the platform unlocks.
               </p>
               <p>
-                User demo account: <span className="font-semibold text-slate-800">user@agrosphere.demo / user123</span>
-              </p>
-              <p>
-                Newly registered accounts must pass verification before the dashboard and GIS portal unlock.
+                Access permissions depend on the assigned user role.
               </p>
             </div>
           </div>
