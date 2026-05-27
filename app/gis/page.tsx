@@ -100,12 +100,12 @@ export default function GISPage() {
   return (
     <RoleGate allow={["user", "admin"]}>
       <div className="relative z-10 flex flex-col gap-6">
-      <section className="app-panel overflow-hidden px-6 py-6 lg:px-8">
+      <section className="app-panel overflow-hidden px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
             <span className="app-chip">Pavlodar Pilot GIS Workspace</span>
             <div>
-              <h1 className="font-display text-4xl font-semibold tracking-[-0.05em] text-ink">
+              <h1 className="font-display text-3xl font-semibold tracking-[-0.05em] text-ink sm:text-4xl">
                 Spatial monitoring, scenario simulation, and plan/fact replay for the Pavlodar pilot zone
               </h1>
               <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
@@ -155,6 +155,7 @@ export default function GISPage() {
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)] 2xl:grid-cols-[320px_minmax(0,1fr)_minmax(540px,620px)]">
+        <div className="order-2 xl:order-1">
         <FieldSidebar
           fields={visibleFields}
           allCrops={getUniqueCrops(fields)}
@@ -166,13 +167,14 @@ export default function GISPage() {
           onSelectField={setSelectedFieldId}
           statuses={["All statuses", "healthy", "attention", "risk", "critical"]}
         />
+        </div>
 
-        <div className="space-y-6 xl:col-span-2 2xl:col-span-2">
+        <div className="order-1 space-y-6 xl:order-2 xl:col-span-2 2xl:col-span-2">
           <SectionCard
             title="Workspace Modes"
             subtitle="Switch between overview, scenario controls, analytics, and plan/fact replay instead of managing every subsystem on one crowded screen."
           >
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               {workspaceViews.map((view) => {
                 const isActive = workspaceView === view.id;
 
@@ -206,8 +208,8 @@ export default function GISPage() {
                 subtitle="Polygon-based overview of the Pavlodar pilot parcels with live status coloring."
                 className="overflow-hidden"
               >
-                <div className="flex h-full min-h-[640px] flex-col gap-4">
-                  <div className="grid gap-3 rounded-[24px] border border-slate-200 bg-slate-50/70 p-4 md:grid-cols-4">
+                <div className="flex h-full min-h-[420px] flex-col gap-4 sm:min-h-[640px]">
+                  <div className="grid gap-3 rounded-[24px] border border-slate-200 bg-slate-50/70 p-4 sm:grid-cols-2 md:grid-cols-4">
                     {[
                       {
                         label: "Healthy",
@@ -245,7 +247,7 @@ export default function GISPage() {
                     ))}
                   </div>
 
-                  <div className="min-h-[540px] flex-1 overflow-hidden rounded-[28px] border border-slate-200">
+                  <div className="min-h-[340px] flex-1 overflow-hidden rounded-[28px] border border-slate-200 sm:min-h-[540px]">
                     <MapView
                       fields={visibleFields}
                       selectedFieldId={selectedField?.id ?? ""}

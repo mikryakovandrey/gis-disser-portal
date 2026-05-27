@@ -23,7 +23,7 @@ export default function RootLayout({
         <DemoPlatformProvider>
           <div className="relative min-h-screen">
             <AppHeader />
-            <main className="mx-auto flex w-full max-w-[1920px] flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8 2xl:px-10">
+            <main className="mx-auto flex w-full max-w-[1920px] flex-col px-3 pb-8 pt-4 sm:px-6 sm:pb-10 sm:pt-6 lg:px-8 2xl:px-10">
               {children}
             </main>
           </div>

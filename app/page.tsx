@@ -27,11 +27,11 @@ export default function DashboardPage() {
     <RoleGate allow={["user", "admin"]}>
       <div className="relative z-10 flex flex-col gap-6">
       <section className="app-panel overflow-hidden">
-        <div className="grid gap-8 px-6 py-7 lg:grid-cols-[1.45fr_0.95fr] lg:px-8 lg:py-8">
+        <div className="grid gap-6 px-4 py-5 sm:px-6 sm:py-7 lg:grid-cols-[1.45fr_0.95fr] lg:px-8 lg:py-8">
           <div className="space-y-5">
-            <span className="app-chip">Thesis Demo Prototype</span>
+            <span className="app-chip">Precision Farming Workspace</span>
             <div className="space-y-3">
-              <h1 className="max-w-3xl font-display text-4xl font-semibold tracking-[-0.05em] text-ink sm:text-5xl">
+              <h1 className="max-w-3xl font-display text-3xl font-semibold tracking-[-0.05em] text-ink sm:text-5xl">
                 AgroSphere GIS portal for intelligent precision farming decisions
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
@@ -102,7 +102,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <KPIStatCard
           label="Monitored Fields"
           value={metrics.fieldCount.toString()}

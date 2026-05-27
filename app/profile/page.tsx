@@ -16,7 +16,7 @@ export default function ProfilePage() {
           title="User profile"
           subtitle="Session summary and access status for the current account."
         >
-          <div className="grid gap-4 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <ProfileStat
               label="Name"
               value={currentUser?.name ?? "-"}

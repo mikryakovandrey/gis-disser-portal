@@ -6,7 +6,7 @@ type KPIStatCardProps = {
 
 export function KPIStatCard({ label, value, helper }: KPIStatCardProps) {
   return (
-    <div className="app-panel px-5 py-5">
+    <div className="app-panel px-4 py-4 sm:px-5 sm:py-5">
       <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
         {label}
       </div>

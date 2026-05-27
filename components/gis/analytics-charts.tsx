@@ -30,7 +30,7 @@ export function AnalyticsCharts({ field }: AnalyticsChartsProps) {
       title="Sensor Data History"
       subtitle={`Temporal analytics and scenario-adjusted model signals for ${field.name}.`}
     >
-      <div className="grid gap-5 xl:grid-cols-3">
+      <div className="grid gap-5 lg:grid-cols-2 2xl:grid-cols-3">
         <div className="rounded-[24px] border border-slate-200 bg-slate-50/75 p-4">
           <div className="mb-4">
             <div className="text-xs uppercase tracking-[0.16em] text-slate-500">

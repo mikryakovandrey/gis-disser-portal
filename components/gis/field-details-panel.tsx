@@ -51,7 +51,7 @@ export function FieldDetailsPanel({ field }: FieldDetailsPanelProps) {
               <div className="text-xs uppercase tracking-[0.16em] text-white/70">
                 Selected Field
               </div>
-              <h2 className="mt-1 font-display text-3xl tracking-[-0.05em]">
+              <h2 className="mt-1 font-display text-2xl tracking-[-0.05em] sm:text-3xl">
                 {field.name}
               </h2>
               <p className="mt-2 text-sm text-white/80">
@@ -102,7 +102,7 @@ export function FieldDetailsPanel({ field }: FieldDetailsPanelProps) {
           <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
             Agronomic Parameters
           </div>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <DetailMetric label="Nitrogen (N)" value={`${field.nutrients.n} ppm`} />
             <DetailMetric label="Phosphorus (P)" value={`${field.nutrients.p} ppm`} />
             <DetailMetric label="Potassium (K)" value={`${field.nutrients.k} ppm`} />

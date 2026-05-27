@@ -73,7 +73,7 @@ export default function RegisterPage() {
               />
             </label>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <button
                 type="submit"
                 className="rounded-full bg-moss px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#21473a]"
@@ -95,7 +95,7 @@ export default function RegisterPage() {
             ) : null}
           </form>
 
-          <div className="space-y-4 rounded-[26px] border border-slate-200 bg-slate-50/80 p-5">
+          <div className="space-y-4 rounded-[26px] border border-slate-200 bg-slate-50/80 p-4 sm:p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
               Registration flow
             </div>

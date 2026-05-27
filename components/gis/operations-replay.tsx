@@ -109,7 +109,7 @@ export function OperationsReplay({ field }: OperationsReplayProps) {
           </div>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <ReplayStat
             label="Area"
             planned={formatArea(replay.plannedAreaHa)}
@@ -136,9 +136,9 @@ export function OperationsReplay({ field }: OperationsReplayProps) {
           />
         </div>
 
-        <div className="grid gap-5 xl:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-5 2xl:grid-cols-[1.15fr_0.85fr]">
           <div className="space-y-4">
-            <div className="h-[360px] overflow-hidden rounded-[28px] border border-slate-200 xl:h-[430px]">
+            <div className="h-[300px] overflow-hidden rounded-[28px] border border-slate-200 sm:h-[360px] xl:h-[430px]">
               <OperationTrackView field={field} playbackIndex={playbackIndex} />
             </div>
 
@@ -258,7 +258,7 @@ export function OperationsReplay({ field }: OperationsReplayProps) {
                 Plan / fact interpretation
               </div>
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                The replay shows how the operation drifted from the plan in area, duration, and input rate. This helps explain why execution quality and machine behavior logically affect the final agronomic result.
+                The replay shows how the operation drifted from plan in area, duration, and input rate so operators can tie execution quality back to field performance.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">

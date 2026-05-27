@@ -51,7 +51,7 @@ export default function AdminPage() {
           title="Admin console"
           subtitle="Manage users and live field overrides."
         >
-          <div className="grid gap-4 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <AdminStat label="Current admin" value={currentUser?.email ?? "-"} />
             <AdminStat label="Registered users" value={String(users.length)} />
             <AdminStat label="Field overrides" value={String(fieldOverrides.length)} />
@@ -74,7 +74,7 @@ export default function AdminPage() {
                     <div className="font-semibold text-slate-800">{user.name}</div>
                     <div className="text-sm text-slate-500">{user.email}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-500">
-                      {user.role} · {user.isVerified ? "verified" : "pending verification"} · created {user.createdAt}
+                      {user.role} - {user.isVerified ? "verified" : "pending verification"} - created {user.createdAt}
                     </div>
                   </div>
 
@@ -146,7 +146,7 @@ export default function AdminPage() {
                   </select>
                 </label>
 
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <label className="block space-y-2">
                     <span className="text-sm font-semibold text-slate-700">Status</span>
                     <select
@@ -213,7 +213,7 @@ export default function AdminPage() {
                   />
                 </label>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <button
                     type="submit"
                     className="rounded-full bg-moss px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#21473a]"

@@ -117,7 +117,7 @@ export function ScenarioLab({
           </div>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_420px]">
+        <div className="grid gap-4 2xl:grid-cols-[minmax(0,1fr)_420px]">
           <div className="rounded-[24px] border border-slate-200 bg-white/80 p-4">
             <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
               Observed field scenarios
@@ -201,10 +201,10 @@ export function ScenarioLab({
                   changedSettings.map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-start justify-between gap-3 rounded-2xl bg-slate-50/80 px-3 py-3"
+                      className="flex flex-col gap-2 rounded-2xl bg-slate-50/80 px-3 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-3"
                     >
                       <div className="text-sm font-medium text-slate-700">{item.label}</div>
-                      <div className="text-right text-sm text-slate-600">
+                      <div className="text-sm text-slate-600 sm:text-right">
                         <span>{item.before}</span>
                         <span className="mx-2 text-slate-400">{"->"}</span>
                         <span className="font-semibold text-slate-800">{item.after}</span>
@@ -260,7 +260,7 @@ export function ScenarioLab({
             <div className="mt-1 text-sm text-slate-600">
               Manual tuning of telemetry and weather inputs. Rainfall stays here because it is an observed condition, not a control action.
             </div>
-            <div className="mt-4 grid gap-3 lg:grid-cols-2">
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
               <ScenarioSlider
                 label="Soil moisture"
                 value={input.soilMoisture}
@@ -317,7 +317,7 @@ export function ScenarioLab({
               Settings the operator can actually adjust in the field.
             </div>
             <div className="mt-4 rounded-[24px] border border-slate-200 bg-slate-50/70 p-4">
-              <div className="grid gap-5 xl:grid-cols-[260px_minmax(0,1fr)]">
+              <div className="grid gap-4 lg:grid-cols-[220px_minmax(0,1fr)] xl:grid-cols-[240px_minmax(0,1fr)]">
                 <div className="space-y-4 rounded-[20px] bg-white px-4 py-4 shadow-sm">
                   <div>
                     <div className="text-xs uppercase tracking-[0.16em] text-slate-500">
@@ -327,7 +327,7 @@ export function ScenarioLab({
                       Choose the field water management regime directly.
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
                     {(
                       ["none", "standard", "smart"] as IrrigationMode[]
                     ).map((mode) => {
